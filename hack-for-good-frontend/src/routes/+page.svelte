@@ -81,11 +81,6 @@
         >
           Sign Out
         </button>
-        <button
-        on:click={()=>{
-          console.log($authData)
-        }}
-        >Check Auth</button>
       </div>
     </div>
   </div>
