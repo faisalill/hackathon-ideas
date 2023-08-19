@@ -212,7 +212,7 @@
 
   {#if modalHandler.profileModal}
     <div
-      class="card w-96 card-bordered shadow-xl md:fixed md:top-[20%] md:left-[40%]"
+      class="card w-96 bg-base-100 card-bordered shadow-xl md:fixed md:top-[20%] md:left-[40%]"
     >
       <div class="card-body">
         <div class="flex justify-between">
