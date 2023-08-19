@@ -29,7 +29,7 @@
   let roadIssueIds = [];
   let filteredIssues = [];
 
-  zoom = 11;
+  zoom = 3;
 
   onMount(async () => {
     const bangaloreCordinates = {
@@ -60,7 +60,7 @@
 
       map = new mapboxgl.Map({
         container: mapContainer,
-        style: `mapbox://styles/mapbox/outdoors-v11`,
+        style: `mapbox://styles/mapbox/streets-v12`,
         center: [bangaloreCordinates.longitude, bangaloreCordinates.latitude],
         zoom: zoom,
       });
@@ -163,7 +163,7 @@
       });
         })
     } else {
-      goto("/");
+      goto("/login");
     }
   });
 
@@ -207,7 +207,7 @@
     const markerElement = document.createElement("div");
 
     markerElement.innerHTML = `
-    <iconify-icon class="text-4xl" icon="${logoLink}" />
+    <iconify-icon class="text-4xl text-black" icon="${logoLink}" />
     `;
 
     return markerElement;
@@ -309,7 +309,7 @@
   </div>
 
   {#if modalHandler.issuesModal}
-    <div class="card w-96 bg-base-100 shadow-xl fixed top-[20%] left-[40%]">
+    <div class="card w-96 bg-base-100 shadow-xl md:fixed md:top-[20%] md:left-[40%]">
       <div class="card-body">
         <div class="flex justify-between">
           <h2 class="card-title mb-4">Issue Details !!!</h2>
@@ -346,7 +346,8 @@
             <option disabled selected>Pick service</option>
             <option>Water</option>
             <option>Electricity</option>
-            <option>Sewage</option>Type here
+            <option>Sewage</option>
+            <option>Garbage</option>
           </select>
         </div>
         <div class="form-control">
@@ -397,8 +398,7 @@
                     issueDetails: issueInput.details,
                   });
 
-                  alert("Issue registered successfully");
-                  window.location.href = "/map";
+                  alert("Issue registered successfully. Please refresh to see the changes.");
                   modalHandler.issuesModal = !modalHandler.issuesModal;
 
                   addressInput = {
@@ -423,7 +423,7 @@
   {/if}
 
   {#if modalHandler.profileModal}
-    <div class="card w-96 bg-base-100 shadow-xl fixed top-[20%] left-[40%]">
+    <div class="card w-96 bg-base-100 shadow-xl md:fixed md:top-[20%] md:left-[40%]">
       <div class="card-body">
         <div class="flex justify-between">
           <h2 class="card-title mb-4">Posted Issues</h2>
@@ -451,8 +451,7 @@
                 on:click={async () => {
                   await deleteDoc(doc(db, "issues", issueIds[index])).then(
                     () => {
-                      alert("Issue deleted successfully");
-                      window.location.href = "/map";
+                      alert("Issue deleted successfully Please refresh to see the changes.");
                     }
                   );
                 }}
@@ -474,8 +473,7 @@
                 on:click={async () => {
                   await deleteDoc(doc(db, "roadIssues", roadIssueIds[index])).then(
                     () => {
-                      alert("Issue deleted successfully");
-                      window.location.href = "/map";
+                      alert("Issue deleted successfully Please refresh to see the changes.");
                     }
                   );
                 }}
@@ -491,7 +489,7 @@
 
   {#if modalHandler.roadIssueModal}
     <div
-      class="card w-96 bg-base-100 shadow-xl fixed top-[20%] left-[40%] scroll-m-1"
+      class="card w-96 bg-base-100 shadow-xl md:fixed md:top-[20%] md:left-[40%]"
     >
       <div class="card-body">
         <div class="flex justify-between">
@@ -592,8 +590,7 @@
                 roadIssueCordinates: nonNestedRoadIssueCordinates,
               })
                 .then(() => {
-                  alert("Road Issue registered successfully");
-                  window.location.href = "/map";
+                  alert("Road Issue registered successfully Please refresh to see the changes.");
                   modalHandler.roadIssueModal = !modalHandler.roadIssueModal;
                 })
                 .catch((e) => {
